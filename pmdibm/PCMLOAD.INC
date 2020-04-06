@@ -1121,18 +1121,25 @@ key_check_set:
 ;==============================================================================
 ;	DataArea
 ;==============================================================================
-allload_mes	db	"ＰＣＭを定義中です。しばらくお待ち下さい。",13,10,"$"
-exit1_mes	db	"PCMが定義出来る環境ではありません。",13,10,"$"
-exit1p_mes	db	"PPSDRVが常駐していません。",13,10,"$"
-exit2_mes	db	"PCMFileが見つかりません。",13,10,"$"
-exit2p_mes	db	"PPSFileが見つかりません。",13,10,"$"
-exit3_mes	db	"PCMFileのFORMATが違います。",13,10,"$"
-exit3p_mes	db	"PPSDRVの確保容量が足りません。",13,10,"$"
-exit4_mes	db	"PCMDataが一致したので読み込みません。",13,10,"$"
-exit4pp_mes	db	"P86DRVの確保容量が足りません。",13,10,"$"
-exit5_mes	db	"PCMFileが読み込めません。",13,10,"$"
-exit5p_mes	db	"PPSFileが読み込めません。",13,10,"$"
-exit6_mes	db	"PCMメモリを他のアプリケーションがアクセス中です。",13,10,"$"
+allload_mes	db	"The PCM is being defined. Please wait.",13,10,"$"
+exit1_mes	db	"The PCM can't be defined there.",13,10,"$"
+exit1p_mes	db	"PPSDRV isn't residenting.",13,10,"$"
+exit2_mes	db	"PCMFile isn't found.",13,10,"$"
+exit2p_mes	db	"PPSFile isn't found.",13,10,"$"
+exit3_mes	db	"The PCMFile format is unknown.",13,10,"$"
+exit3p_mes	db	"Capacity of the PPSDRV is insufficient.",13,10,"$"
+exit4_mes	db	"Because the PCMData is matched, this is not read.",13,10,"$"
+exit4pp_mes	db	"Capacity of the P86DRV is insufficient.",13,10,"$"
+exit5_mes	db	"The PCMFile cannot be read.",13,10,"$"
+exit5p_mes	db	"The PPSFile cannot be read.",13,10,"$"
+exit6_mes	db	"Another application is accessing the PCM memory.",13,10,"$"
+exit1z_mes	db	"PCMFile isn't found.",13,10,"$"
+exit2z_mes	db	"The PCMFile format is unknown.",13,10,"$"
+exit3z_mes	db	"Out of memory.",13,10,"$" ; i know, this translation isn't geniue.
+exit4z_mes	db	"Unable to map EMS handle.",13,10,"$"
+exit5z_mes	db	"PPZ8 isn't residenting.",13,10,"$"
+ppzbank_mes	db	"PPZ8("
+banknum		db	"?):$"
 adpcm_header	db	"ADPCM DATA for  PMD ver.4.4-  " ;30 bytes
 
 retry_flag	db	0

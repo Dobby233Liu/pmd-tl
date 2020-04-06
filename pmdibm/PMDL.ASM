@@ -9,10 +9,10 @@ ifndef	ibm
 ibm		=	0	;１の時IBM sound blaster用
 endif
 
-ver	equ	"4.6a"
+ver	equ	"4.6at"
 vers	equ	46H
 verc	equ	"a"
-date	equ	"Oct.23th 1993"
+date	equ	"2020/04/06"
 
 resmes	equ	"PMDL ver.",ver
 
@@ -4503,9 +4503,9 @@ grph	equ	"GRPH"
 endif
 
 mes_not_board	db	07,"WARNING:"
-		db	"OPL FM Sound Board is not found.",13,10,eof
+		db	"no OPL FM Sound Board is found.",13,10,eof
 
-mes_cut		db	"Removed from Memory.",13,10,eof
+mes_cut		db	"Removed from memory.",13,10,eof
 
 mes_title	db	"Music Driver P.M.D. for "
 if	ibm
@@ -4516,8 +4516,8 @@ endif
 		db	"/OPL Version ",ver,13,10
 		db	"Copyright (C)1989,",date," by M.Kajihara(KAJA).",13,10,13,10,eof
 
-mes_int		db	"Irq "
-int_num		db	" ,Port "
+mes_int		db	"IRQ "
+int_num		db	", port "
 if	ibm
 port_num	db	" 88H"
 else
@@ -4525,79 +4525,79 @@ port_num	db	" 8CH"
 endif
 		db	" is used.",13,10,eof
 
-mes_wait1	db	"FM LSI Waitloop Times Between REG-DATA : ",eof
+mes_wait1	db	"FM LSI wait-loop times between REG-DATA: ",eof
 mes_wait2	db	" (about ",eof
 mes_wait3	db	"ns)",13,10,eof
 
-cantcut_mes	db	"Now PMD is prohibitted to Remove from memory.",13,10,eof
-pmderror_mes1	db	"Timer Vector address is changed by other TSRs after PMD Staying.",13,10,eof
-pmderror_mes2	db	"Music Data Buffer size must over 6KBytes.",13,10,eof
-pmderror_mes3	db	"Music+Voice+Effect Data size must under 50KBytes.",13,10,eof
-pmderror_mes4	db	"Failed to Remove from Memory.",13,10,eof
+cantcut_mes	db	"Now PMD is prohibitted to remove from memory.",13,10,eof
+pmderror_mes1	db	"Timer vector address is changed by other TSRs after PMD staying.",13,10,eof
+pmderror_mes2	db	"Music data buffer size must be over 6KBytes.",13,10,eof
+pmderror_mes3	db	"Music+voice+effect data size must under 50KBytes.",13,10,eof
+pmderror_mes4	db	"Failed to remove from memory.",13,10,eof
 pmderror_mes5	db	"PMD is not staying now.",13,10,eof
-pmderror_mes6	db	"Appointed Options that can not change.",13,10,eof
+pmderror_mes6	db	"Appointed options that cannot be changed.",13,10,eof
 mes_exit	db	"Stayed.",13,10
-		db	"PMD Functions INT 60H is now usable.",13,10
+		db	"PMD functions is now usable through INT 60H.",13,10
 		db	eof
 
-mes_key		db	"Can STOP Music by ESC key, FF music by ",GRPH," key.",13,10,eof
+mes_key		db	"You can stop the music by pressing the ESC key, but for FF music, use ",GRPH," key.",13,10,eof
 
-mes_usage	db	"Usage:  PMD"
+mes_usage	db	"Usage: PMD"
 if	ibm
 		db	"IBM"
 else
 		db	"L"
 endif
 		db	" [/option[number]][/option[number]]..",13,10,13,10
-		db	"Option: /Mn  Music  Data Buffer Size(KB)Def.=16",13,10
-		db	"        /Vn  Voice  Data Buffer Size(KB)Def.= 4",13,10
-		db	"        /En  Effect Data Byffer Size(KB)Def.= 4",13,10
-		db	"      * /DFn FM Music Total Volume(MAX 0 - MIN 255)Def.= 0",13,10
-		db	"      * /K(-)Cut ESC/",GRPH," key function(Use)",13,10
-		db	"      * /KEn Set Special CTRL key using with ESC  Def.="
+		db	"Option: /Mn  Music  data buffer size (KB) Def.=16",13,10
+		db	"        /Vn  Voice  data buffer size (KB) Def.= 4",13,10
+		db	"        /En  Effect data buffer size (KB) Def.= 4",13,10
+		db	"      * /DFn FM music total volume (0-255, Def.= 0)",13,10
+		db	"      * /K(-)don't use ESC/",GRPH," key function (or use)",13,10
+		db	"      * /KEn Set special control key using with ESC  Def.="
 if	ibm
 		db	"4",13,10
 else
 		db	"16",13,10
 endif
-		db	"      * /KGn Set Special CTRL key using with ",grph," Def.="
+		db	"      * /KGn Set special control key using with ",grph," Def.="
 if	ibm
 		db	"4",13,10
 else
 		db	"16",13,10
 endif
 if	ibm
-		db	"             Special CTRL:1=ShiftR 2=ShiftL 4=CTRL 8=Alt(Can Add)",13,10
+		db	"             Special controls: 1=ShiftR 2=ShiftL 4=CTRL 8=Alt (can be mixed)",13,10
 else
-		db	"             Special CTRL:1=SHIFT 2=CAPS 4=ｶﾅ 16=CTRL(Can Add)",13,10
+		db	"             Special controls: 1=SHIFT 2=CAPS 4=ｶﾅ 16=CTRL (can be mixed)",13,10
 endif
-		db	"      * /F(-)not Stop Music after fadeout(Stop)",13,10
-		db	"      * /I(-)Disable interrupt while Timer/INT60 inttrupt(Enable)",13,10
-		db	"      * /Wn  Set FM LSI Waitloop Times Between REG-DATA(1-255,Def.=auto)",13,10
-		db	"      * /Gn  Set SPEED of FF Music by ",grph," key Def.=14",13,10
-		db	"        /R   Remove from Memory",13,10
-		db	"        /H   This Help",13,10
+		db	"      * /F(-) don't stop music after fadeout (or do)",13,10
+		db	"      * /I(-) disable interrupt while Timer/INT 60 interrupt (or enable)",13,10
+		db	"      * /Wn  Set FM LSI Wait-loop times between REG-DATA (1-255, Def.=auto)",13,10
+		db	"      * /Gn  Set speed of the FF music by ",grph," key Def.=14",13,10
+		db	"        /R   Remove from memory",13,10
+		db	"        /H   This help",13,10
 		db	"     (* options can re-establish, - establish between parenthesiss.)",eof
 
-changemes_0	db	"Parameter is Changed.",13,10
+changemes_0	db	"Parameter is changed.",13,10
 crlf		db	13,10,eof
 changemes_1	db	"  ----- Now Establishments -----",13,10
-		db	"* FM Music Total Volume : ",eof
+		db	"* FM Music total volume: ",eof
 changemes_6	db	"* ",GRPH,"/ESC key Control : ",eof
 changemes_6a	db	"Enable",13,10,eof
 changemes_6b	db	"Disable",13,10,eof
-changemes_7	db	"* Special CTRL key code uses with ESC :",eof
-changemes_8	db	"* Special CTRL key code uses with ",grph," :",eof
-changemes_9	db	"* Music After Fadeout : ",eof
+changemes_7	db	"* Special CTRL key code uses with ESC:",eof
+changemes_8	db	"* Special CTRL key code uses with ",grph,":",eof
+changemes_9	db	"* Music After Fadeout: ",eof
 changemes_9a	db	"Stop",13,10,eof
 changemes_9b	db	"Continue",13,10,eof
-changemes_10	db	"* Other Interrupts while Timer/INT60 Interrupt : ",eof
+changemes_10	db	"* Other interrupts while timer/INT 60 interrupt: ",eof
 changemes_10a	db	"Disable",13,10,eof
 changemes_10b	db	"Enable",13,10,eof
-changemes_12	db	"* FM LSI Waitloop Times Between REG-DATA : ",eof
+changemes_12	db	"* FM LSI Wait-loop times between REG-DATA: ",eof
 changemes_12a	db	"(about ",eof
 changemes_12b	db	"ns)",13,10,eof
-changemes_13	db	"* SPEED of FF Music by ",grph," key : ",eof
+changemes_13	db	"* speed of the FF music by ",grph," key: ",eof
 
 ;	常駐する時のオプション
 resident_option	db	"H"

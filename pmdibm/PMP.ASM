@@ -451,11 +451,11 @@ readerror:
 ;	Datas
 ;==============================================================================
 
-read_error_mes	db	"File Not Found.",13,10,"$"
+read_error_mes	db	"File not found.",13,10,"$"
 
-mstart_MES	DB	"Started Playing.",13,10,13,10,"$"
+mstart_MES	DB	"Starting playing.",13,10,13,10,"$"
 
-Mstop_MES	DB	"Stopped Playing."
+Mstop_MES	DB	"Stopped playing."
 mes_crlf	db	13,10,"$"
 
 mes_ppsfile	db	"PPSFile  : $"
@@ -465,7 +465,7 @@ mes_composer	db	"Composer : $"
 mes_arranger	db	"Arranger : $"
 mes_memo	db	"         : $"
 
-fade_MES	DB	"Started Fadeout.",13,10,"$"
+fade_MES	DB	"Starting fadeout.",13,10,"$"
 
 notres_mes	db	"PMD is not staying.",13,10,"$"
 
@@ -481,8 +481,8 @@ pmp_USAGE_MES	DB	"Usage:  pmp /{P|S|Fn}",13,10
 		db	"   filename  ... stop/load(/pcmset)/play(/put)",13,10
 		db	"$"
 
-pmp_title_mes	db	"Professional Music Driver [P.M.D.] player for PMD ver.4.4 -",13,10
-		db	"                  Programmed by M.Kajihara 1993/09/24",13,10,13,10,"$"
+pmp_title_mes	db	"Professional Music Driver [P.M.D.] player for PMD ver.4.4t -",13,10
+		db	"                  Programmed by M.Kajihara 2020/04/06",13,10,13,10,"$"
 
 memo_flg	db	0
 pcm_flg		db	0

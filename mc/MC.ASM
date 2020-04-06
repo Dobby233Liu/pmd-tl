@@ -8141,14 +8141,14 @@ warning_mes	db	"Warning ",eof
 not_ff_mes	db	": The tone file name is not specified.",cr,lf,eof
 ff_readerr_mes	db	": The tone file cannot be read.",cr,lf,eof
 not_pmd_mes	db	": PMD is not in residentment.",cr,lf,eof
-loop_err_mes	db	" : Loop end symbol ] is not enough.",cr,lf,eof
+loop_err_mes	db	": Loop end symbol ] is not enough.",cr,lf,eof
 mcopt_err_mes	db	": The description in the environment variable MCOPT is incorrect.",13,10,eof
 
 if	efc
 usames		db	"Usage:  EFC [/option] filename[.EML] [filename[.FF]]",cr,lf,cr,lf
 		db	"Option: /V  compile with tone datas",cr,lf
 		db	"        /VW write Voicefile after compile",cr,lf
-		db	"        /N  Compile on OPN Mode(Default)",cr,lf
+		db	"        /N  Compile on OPN Mode (Default)",cr,lf
 		db	"        /M  Compile on OPM Mode",cr,lf
 		db	"        /L  Compile on OPL Mode",cr,lf,eof
 
@@ -8170,7 +8170,7 @@ ife	hyouka
 		db	"        /VW Write tone data after compilation",cr,lf
 		db	"        "
 endif
-		db	"/N  		   OPN   Mode(Default)",cr,lf
+		db	"/N  		   OPN   Mode (Default)",cr,lf
 		db	"        /L  		    OPL   Mode",cr,lf
 ife	hyouka
 		db	"        /M  			OPM   Mode",cr,lf

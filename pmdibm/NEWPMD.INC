@@ -18,7 +18,7 @@ _mstart		equ	13
 _mstop		equ	16
 _fout		equ	19
 _effgo		equ	22
-_effoff		equ	25
+_effoff		equ	25f
 _getss		equ	28
 _getfv		equ	31
 
