@@ -1,13 +1,13 @@
 ;==============================================================================
-;	Professional Music Driver [P.M.D.] version 4.8
+;	Professional Music Driver [P.M.D.] version 4.8sen
 ;					FOR PC98 (+ Speak Board)
 ;			By M.Kajihara
 ;==============================================================================
 
-ver		equ	"4.8s"
+ver		equ	"4.8sen"
 vers		equ	48H
 verc		equ	"s"
-date		equ	"Jan.22nd 2020"
+date		equ	"3/11/2020"
 
 mdata_def	equ	16
 voice_def	equ	8
@@ -8365,14 +8365,11 @@ pcmst_seg	dw	0
 pcmadrs		db	6*256 dup (0)
  endif
 endif
-		db	"ここはＳＴＡＣＫエリアです。いつ"
-		db	"もＰＭＤをご愛用して下さっている"
-		db	"方々、どうもありがとうございます"
-		db	"(^^)。何かバグらしき物が見つかり"
-		db	"ましたら、些細な事でも構いません"
-		db	"ので、是非私までご一報、お願いし"
-		db	"ますね(^^)。→PMDBBS [03(3395)96"
-		db	"00] @PMD ボードまで     by KAJA."
+		db	"This is the STACK area. "
+		db  "Thank you very much for those who always use PMD (^^). "
+		db  "If you find something that looks like a bug, "
+		db	"it's okay if it's trivial, so please let me know and give it a shot (^^)."
+		db  " → PMDBBS [03(3395)9600] @PMD board by KAJA."
 _stack:
 dataarea	label	word
 		db	0		;
@@ -10544,20 +10541,20 @@ else
 eof	equ	"$"
 endif
 
-mes_warning	db	07,"WARNING:$"
+mes_warning	db	07,"WARNING: $"
 if	board2
  if	pcm+ppz
-mes_not_board	db	"YM2608+PCM が見つかりません．",13,10,eof
+mes_not_board	db	"YM2608 + PCM not found.",13,10,eof
  else
-mes_not_board	db	"YM2608+ADPCM が見つかりません．",13,10,eof
+mes_not_board	db	"YM2608 + ADPCM not found.",13,10,eof
  endif
 else
-mes_not_board	db	"ＦＭ音源ボードが装着されていません．",13,10,eof
+mes_not_board	db	"FM sound board is not installed.",13,10,eof
 endif
 
-mes_cut		db	"常駐解除しました．",13,10,eof
+mes_cut		db	"Resident released.",13,10,eof
 
-mes_title	db	"Ｍｕｓｉｃ　Ｄｒｉｖｅｒ　Ｐ.Ｍ.Ｄ. for PC9801/88VA Version ",ver
+mes_title	db	"Professional Music Driver (P.M.D.) for PC9801/88VA Version ",ver
 ifdef	_optnam
 		db	_optnam
 endif
@@ -10565,54 +10562,54 @@ endif
 		db	"Copyright (C)1989,",date," by M.Kajihara(KAJA).",13,10,13,10,eof
 
 mes_int		db	"Int "
-int_num		db	" ,Port "
+int_num		db	", port "
 if	va
-		db	"44H"
+		db	"44h"
 else
-port_num	db	" 88H"
+port_num	db	" 88h"
 endif
-		db	"(",eof
-mes_int2	db	")を使用します．",13,10,eof
+		db	" (",eof
+mes_int2	db	") used.",13,10,eof
 ongen_sel	dw	mes_ongen0,mes_ongen1
 mes_ongen0	db	"YM2203",eof
 mes_ongen1	db	"YM2608",eof
 
 if	board2*adpcm
 pcm_sel		dw	mes_adpcm,mes_only
-mes_adpcm	db	"+ADPCM",eof
+mes_adpcm	db	" + ADPCM",eof
 mes_only	db	" only",eof
 endif
 
 if	board2*pcm
-mes_pcm		db	"+PCM",eof
+mes_pcm		db	" + PCM",eof
 endif
 
-mes_ppsdrv	db	"PPSDRV(INT64H)に対応します．",13,10,eof
+mes_ppsdrv	db	"For PPSDRV (INT 64H).",13,10,eof
 if	ppz
-mes_ppz8	db	"PPZ8(INT7FH)に対応します．",13,10,eof
+mes_ppz8	db	"For PPZ8 (INT 7FH).",13,10,eof
 endif
-mes_wait1	db	"FM音源LSI REG-DATA間 Waitloop回数: ",eof
-mes_wait2	db	"回 (約 ",eof
-mes_wait3	db	"ns)",13,10,eof
+mes_wait1	db	"Wait-loop frequency between FM sound source LSI and REG-DATA: ",eof
+mes_wait2	db	" times (~= ",eof
+mes_wait3	db	" ns)",13,10,eof
 
-cantcut_mes	db	"現在常駐解除は禁止されています．PMD関連TSRを先に解放して下さい．",13,10,eof
-pmderror_mes1	db	"常駐時とFM割り込みベクトルが違います．",13,10,eof
-pmderror_mes2	db	"曲データバッファは 1KB 以上にして下さい．",13,10,eof
-pmderror_mes3	db	"曲+音色+効果音データの合計は 40KB 以内にして下さい．",13,10,eof
-pmderror_mes4	db	"解放に失敗しました．",13,10,eof
-pmderror_mes5	db	"ＰＭＤは常駐していません．",13,10,eof
-pmderror_mes6	db	"変更出来ないオプションを指定しています．",13,10,eof
-pmderror_mes7	db	"メモリが確保出来ません。",13,10,eof
+cantcut_mes	db	"Resident releasing is currently prohibited. Please release PMD related TSR first.",13,10,eof
+pmderror_mes1	db	"The resident and the FM interrupt vector are different.",13,10,eof
+pmderror_mes2	db	"The song data buffer must be 1KB or more.",13,10,eof
+pmderror_mes3	db	"The total of song + tone + sound effect data must be within 40KB.",13,10,eof
+pmderror_mes4	db	"Releasing failed.",13,10,eof
+pmderror_mes5	db	"PMD is not residenting.",13,10,eof
+pmderror_mes6	db	"An option that cannot be changed is specified.",13,10,eof
+pmderror_mes7	db	"Memory cannot be secured.",13,10,eof
 
-mes_exit	db	"常駐しました．",13,10
-		db	"INT 60HでPMDを操作可能です．",13,10
+mes_exit	db	"Successfully residented in memory.",13,10
+		db	"Control PMD using INT 60H.",13,10
 		db	eof
 
-mes_key		db	"ESC/GRPHキーで曲の停止、早送りが可能です．",13,10,eof
+mes_key		db	"The song can be stopped and fast-forwarded with the ESC / GRPH key.",13,10,eof
 
-mes_kankyo	db	"環境変数 PMDOPT の設定に誤りがあります．",13,10,eof
+mes_kankyo	db	"The setting of environment variable PMDOPT is incorrect.",13,10,eof
 
-mes_usage	db	"Usage:",9,"PMD"
+mes_usage	db	"Usage: ",9,"PMD"
 if	va
 		db	"VA"
  ife	board2
@@ -10634,106 +10631,106 @@ else
   endif
  endif
 endif
-		db	" [/option[数値]][/option[数値]]..",13,10
-		db	"Option:"
-		db	9,"  /Mn  曲データ      バッファサイズ指定(KB単位)Def.=16",13,10
-		db	9,"  /Vn  音色データ    バッファサイズ指定(KB単位)Def.= 8",13,10
-		db	9,"  /En  FM効果音データバッファサイズ指定(KB単位)Def.= 4",13,10
+		db	" [/option[value]][/option[value]]..",13,10
+		db	"Options:"
+		db	9,"  /Mn  Song data buffer size specification (KB as the unit) Def. = 16",13,10
+		db	9,"  /Vn  Tone data buffer size specification (KB as the unit) Def. = 8",13,10
+		db	9,"  /En  FM sound effect data buffer size specification (KB as the unit) Def. = 4",13,10
 ife	va
-		db	9,"  /On  FM音源 PORT指定 0=088H 1=188H 2=288H 3=388H Def.=auto",13,10
+		db	9,"  /On  FM sound source port specification 0 = 088H 1 = 188H 2 = 288H 3 = 388H Def. = Auto",13,10
 endif
-		db	9,"* /DFn FM音源の    音量調整値設定(最大0～最小255)Def.="
+		db	9,"* /DFn FM sound volume adjustment value setting (maximum 0 to minimum 255) Def. = "
 if	 board2
-		db	" 0",13,10
+		db	"0",13,10
 else
 		db	"16",13,10
 endif
-		db	9,"* /DSn SSG音源の   音量調整値設定(最大0～最小255)Def.= 0",13,10
+		db	9,"* /DSn SSG sound volume adjustment value setting (maximum 0 to minimum 255) Def. = 0",13,10
 if	board2
-		db	9,"* /DPn PCM音源の   音量調整値設定(最大0～最小255)Def.= 0",13,10
+		db	9,"* /DPn PCM sound volume adjustment value setting (maximum 0 to minimum 255) Def. = 0",13,10
 if	ppz
-		db	9,"* /DZn PPZ8   の   音量調整値設定(最大0～最小255)Def.= 0",13,10
+		db	9,"* /DZn PPZ8 volume adjustment value setting (maximum 0 to minimum 255) Def. = 0",13,10
 endif
-		db	9,"* /DRn RHYTHM音源の音量調整値設定(最大0～最小255)Def.= 0",13,10
-		db	9,"* /N(-)SSGドラムと同時にリズム音源を鳴らさない(鳴らす)",13,10
+		db	9,"* /DRn RHYTHM sound volume adjustment value setting (maximum 0 to minimum 255) Def. = 0",13,10
+		db	9,"* /N(-) Do not play the rhythm sound source simultaneously with the SSG drum (sound)",13,10
 endif
-		db	9,"* /K(-)ESC/GRPHキーで曲の停止/早送りをしない(する)",13,10
+		db	9,"* /K(-) Do not stop / fast-forward the song with the ESC / GRPH key",13,10
 if	va
-		db	9,"* /KEn MSTOP/ESC と同時に使用するキーの設定 Def.=4",13,10
-		db	9,"* /KGn FF   /GRPHと同時に使用するキーの設定 Def.=4",13,10
-		db	9,"* /KRn REW  /GRPHと同時に使用するキーの設定 Def.=2",13,10
-		db	9,9,"設定値: 1=ｶﾅ 2=SHIFT 4=CTRL (加算して複数指定可)",13,10
+		db	9,"* /KEn Setting of keys to be used simultaneously with MSTOP / ESC Def. = 4",13,10
+		db	9,"* /KGn FF   Setting of key used at the same time as /GRPH Def. = 4",13,10
+		db	9,"* /KRn REW  Setting of key used at the same time as /GRPH Def. = 2",13,10
+		db	9,9,"Values: 1=ｶﾅ 2=SHIFT 4=CTRL (Multiple can be specified by adding)",13,10
 else
-		db	9,"* /KEn MSTOP/ESC と同時に使用するキーの設定 Def.=16",13,10
-		db	9,"* /KGn FF   /GRPHと同時に使用するキーの設定 Def.=16",13,10
-		db	9,"* /KRn REW  /GRPHと同時に使用するキーの設定 Def.=1",13,10
-		db	9,9,"設定値: 1=SHIFT 2=CAPS 4=ｶﾅ 16=CTRL (加算して複数指定可)",13,10
+		db	9,"* /KEn Setting of keys to be used simultaneously with MSTOP / ESC Def.=16",13,10
+		db	9,"* /KGn FF   Setting of key used at the same time as /GRPH Def. = 6",13,10
+		db	9,"* /KRn REW  Setting of key used at the same time as /GRPH Def.=1",13,10
+		db	9,9,"Values: 1=SHIFT 2=CAPS 4=ｶﾅ 16=CTRL (Multiple can be specified by adding)",13,10
 endif
-		db	9,"* /F(-)フェードアウト後に曲を停止しない(する)",13,10
-		db	9,"* /I(-)FM/INT60割り込み中は割り込みを禁止する(しない)",13,10
-		db	9,"* /P(-)PPSDRVに対応しない(常駐していたら対応する)",13,10
+		db	9,"* /F(-) Don't stop songs after fading out",13,10
+		db	9,"* /I(-) Disable interrupt during FM / INT60 interrupt",13,10
+		db	9,"* /P(-) Do not support PPSDRV (supports if resident)",13,10
 if	ppz
-		db	9,"* /Z(-)PPZ8に対応しない(常駐していたら対応する)",13,10
+		db	9,"* /Z(-) Do not support PPZ8 (supports if resident)",13,10
 endif
-		db	9,"* /Wn  FM音源REG-DATA間のWait回数の設定(1～255,数値省略時は自動判別)",13,10
-		db	9,"* /Gn  GRPHキーによる早送りのTimerB値 Def.=250",13,10
+		db	9,"* /Wn  Wait-loop frequency between FM sound source LSI and REG-DATA (1 to 255, automatic detection when omitted)",13,10
+		db	9,"* /Gn  TimerB value of fast forward by GRPH key Def.=250",13,10
 if	board2*adpcm
  ife	ademu
-		db	9,"* /An  ADPCM定義速度 0=高速 1=中速 2=低速 Def.=Auto",13,10
+		db	9,"* /An  ADPCM defining speed 0 = High speed 1 = Medium speed 2 = Low speed Def.=Auto",13,10
  endif
 endif
 if	board2*pcm
-		db	9,"* /S(-)PCMパート仕様をPMDB2に合わせる(合わせない)",13,10
-		db	9,"* /HZn PCM周波数(0～8,4.13/5.52/8.27/11.03/16.54/22.05/33.08/44.10/自動)",13,10
+		db	9,"* /S(-) Match PCM part specifications to PMDB2 (do not match if /S-)",13,10
+		db	9,"* /HZn PCM frequency(0～8,4.13/5.52/8.27/11.03/16.54/22.05/33.08/44.10/自動)",13,10
 endif
-		db	9,"  /R   常駐解除する",9,9,"/H   ヘルプの表示",13,10
-		db	9,"(* の付いたoptionは常駐後に再設定可能, - は括弧内に設定)",eof
+		db	9,"  /R   release residentment",9,9,"/H   displays help message (this)",13,10
+		db	9,"(Options marked with * can be reset after residency - is set in parentheses)",eof
 
-changemes_0	db	"設定を変更しました．",13,10
+changemes_0	db	"The settings have been changed.",13,10
 crlf		db	13,10,eof
-changemes_01	db	"　----- 現在の設定 -----",13,10
-		db	"・曲　　データバッファサイズ:",eof
-changemes_02	db	"KB",13,10,"・音色　データバッファサイズ:",eof
-changemes_03	db	"KB",13,10,"・効果音データバッファサイズ:",eof
-changemes_1	db	"KB",13,10,"・FM音源    音量調整値:",eof
-changemes_2	db	"・SSG音源   音量調整値:",eof
+changemes_01	db	"　----- Current Settings -----",13,10
+		db	"・ Song data buffer size:",eof
+changemes_02	db	"KB",13,10,"・ Tone / data buffer size:",eof
+changemes_03	db	"KB",13,10,"・ Sound effect data buffer size:",eof
+changemes_1	db	"KB",13,10,"・ FM sound volume adjustment value:",eof
+changemes_2	db	"・ SSG sound source volume adjustment value:",eof
 if	board2
-changemes_3	db	"・PCM音源   音量調整値:",eof
+changemes_3	db	"・ PCM sound volume adjustment value:",eof
 if	ppz
-changemes_3z	db	"・PPZ8      音量調整値:",eof
+changemes_3z	db	"・ PPZ8 volume adjustment value:",eof
 endif
-changemes_4	db	"・RHYTHM音源音量調整値:",eof
-changemes_5	db	"・SSGドラム発音時に同時にRHYTHM音源を鳴ら",eof
-changemes_5a	db	"す",13,10,eof
-changemes_5b	db	"さない",13,10,eof
+changemes_4	db	"・ RHYTHM sound source volume adjustment value:",eof
+changemes_5	db	"・ Rhythm sound source sounds simultaneously when SSG drum is sounded ",eof
+changemes_5a	db	"yes",13,10,eof
+changemes_5b	db	"no",13,10,eof
 endif
-changemes_6	db	"・GRPH/ESCキーで早送り/曲の停止を制御",eof
-changemes_6a	db	"する",13,10,eof
-changemes_6b	db	"しない",13,10,eof
-changemes_7	db	"・MSTOP/ESC と同時に使用するキー設定値:",eof
-changemes_8	db	"・FF   /GRPHと同時に使用するキー設定値:",eof
-changemes_8b	db	"・REW  /GRPHと同時に使用するキー設定値:",eof
-changemes_9	db	"・フェードアウト後に曲の演奏を停止",eof
-changemes_10	db	"・FM/INT60割り込み中に割り込みを禁止",eof
-changemes_11	db	"・PPSDRVを使用",eof
-changemes_11_	db	"・PPZ8  を使用",eof
-changemes_12	db	"・FM音源LSI REG-DATA間 Waitloop回数: ",eof
-changemes_12a	db	"回(約 ",eof
-changemes_12b	db	"ns)",13,10,eof
-changemes_13	db	"・GRPHによる早送り時のTimerB値: ",eof
+changemes_6	db	"・ Control fast-forward / stop music with GRPH / ESC key ",eof
+changemes_6a	db	"yes",13,10,eof
+changemes_6b	db	"no",13,10,eof
+changemes_7	db	"・ Key settings used simultaneously with MSTOP / ESC:",eof
+changemes_8	db	"・ Key settings used simultaneously with FF / GRPH:",eof
+changemes_8b	db	"・ Key settings used simultaneously with REW / GRPH:",eof
+changemes_9	db	"・ Stop playing music after fade out",eof
+changemes_10	db	"・ Disable interrupt during FM / INT60 interrupt",eof
+changemes_11	db	"・ Use PPSDRV",eof
+changemes_11_	db	"・ Use PPZ8",eof
+changemes_12	db	"・Wait-loop frequency between FM sound source LSI and REG-DATA: ",eof
+changemes_12a	db	" times(~= ",eof
+changemes_12b	db	" ns)",13,10,eof
+changemes_13	db	"・TimerB value of fast forward by GRPH key: ",eof
 if	board2*adpcm
  ife	ademu
-changemes_14	db	"・ADPCM定義速度: ",eof
-changemes_14a	db	"高速",13,10,eof
-changemes_14b	db	"中速",13,10,eof
-changemes_14c	db	"低速",13,10,eof
+changemes_14	db	"・ADPCM defining speed: ",eof
+changemes_14a	db	"High",13,10,eof
+changemes_14b	db	"Med.",13,10,eof
+changemes_14c	db	"Low",13,10,eof
  endif
 endif
 if	board2*pcm
-changemes_15	db	"・PCMパート仕様をPMDB2に合わせ",eof
-changemes_15a	db	"ない",13,10,eof
-changemes_15b	db	"る",13,10,eof
-changemes_16	db	"・PCM再生周波数: ",eof
+changemes_15	db	"・Match PCM part specifications to PMDB2 ",eof
+changemes_15a	db	"yes",13,10,eof
+changemes_15b	db	"no",13,10,eof
+changemes_16	db	"・PCM playback rate: ",eof
 changemes_16a	db	"4.13438",eof
 		db	"5.51250",eof
 		db	"8.26875",eof
@@ -10742,8 +10739,8 @@ changemes_16a	db	"4.13438",eof
 		db	"22.0500",eof
 		db	"33.0750",eof
 		db	"44.1000",eof
-		db	"自動選択",13,10,eof
-changemes_16b	db	"KHz 固定",13,10,eof
+		db	"Decide Automaticlly",13,10,eof
+changemes_16b	db	"fixed KHz",13,10,eof
 endif
 
 vector_table	db	"0",03

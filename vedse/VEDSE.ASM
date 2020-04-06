@@ -189,14 +189,7 @@ repnz	scasb
 ;		input	cx to sound_number
 ;==============================================================================
 	add	cx,cx
-
-	mov	bx,offset keydata
-	add	bx,cx
-	mov	ax,[bx]
-	mov	word ptr [keypush_dat],ax
-
 	add	cx,cx
-
 	mov	bx,offset sound_buffer
 	add	bx,cx
 
@@ -220,8 +213,6 @@ repnz	scasb
 
 	mov	dx,28f0h
 	call	opnset		;keyon
-
-	print_mes	keypush_mes
 
 	mov	dl,ds:[bx]	;dl = key group
 	inc	bx
@@ -249,9 +240,6 @@ key_1ms_wait:
 	call	opnset		;keyoff
 
 	call	key_buffer_clear
-
-	mov	word ptr ds:[keypush_dat],"  "
-	print_mes	keypush_mes
 	jmp	main_loop
 
 ;==============================================================================
@@ -1491,22 +1479,22 @@ escp		equ	01bh
 mes_1		db	"; nm alg fbl",13,10,0
 mes_2a		db	"; ar  dr  sr  rr  sl  tl  ks  ml  dt ams   seg",0
 mes_2b		db	"; ar  dr  sr  rr  sl  tl  ks  ml  dt ams",0
-mes_start	db	escp,"[01;74Hˆ—’†$"
+mes_start	db	escp,"[01;74HProcesing$"
 mes_fin		db	escp,"[01;74H      $"
 
-title_mes	db	"Voice Editor for PMD .FF file with SSG-EG ver.1.9a",13,10
-		db	"      Programmed by M.Kajihara 2020.03.07",13,10
+title_mes	db	"Voice Editor for PMD .FF file with SSG-EG ver.1.9",13,10
+		db	"      Programmed by M.Kajihara 2020.01.22",13,10
 		db	13,10,"$"
 
 usage_mes	db	"Usage: vedse filename[.FF]",13,10,"$"
 
-disk_errmes	db	"ƒtƒ@ƒCƒ‹‚ÌƒAƒNƒZƒX‚ÉŽ¸”s‚µ‚Ü‚µ‚½B",13,10,"$"
+disk_errmes	db	"File accessing failed.",13,10,"$"
 
-complete_mes	db	escp,"*save‚µ‚ÄI—¹‚µ‚Ü‚µ‚½B",13,10,"$"
-exit_mes	db	escp,"*save‚¹‚¸I—¹‚µ‚Ü‚µ‚½B",13,10,"$"
+complete_mes	db	escp,"Note: saved and finished.",13,10,"$"
+exit_mes	db	escp,"Note: exited without saving.",13,10,"$"
 
 screen	label	byte
-	db	escp,"*[[[ PMD Voice Editor ver.1.9a ]]] / Programmed by M.Kajihara 2020.03.07",13,10
+	db	escp,"*[[[ PMD Voice Editor ver.1.9 ]]] / Programmed by M.Kajihara 2020.01.22",13,10
 	db	escp,"[03;00H=================== Edit Area ==================="
 	db	escp,"[25;00H================================================="
 	db	escp,"[14;00H=================== Push Area ==================="
@@ -1522,63 +1510,59 @@ base	label	byte
 	db	"slot4 000 000 000 000 000 000 000 000 000 000 000",13,10,"$"
 
 notice	label	byte
-	db	escp,"[03;52H====== Key Instruction ======"
-	db	escp,"[04;52H--------- PLAYŒn“ ----------"
-	db	escp,"[05;52Hƒtƒ‹ƒL[‰º‚Q’i   Œ®”Õ(c‚ªƒh) "
-	db	escp,"[06;52HINS/DEL          Octave +1/-1"
-	db	escp,"[07;52H--------- EDITŒn“ ----------"
-	db	escp,"[08;52Hª«©¨         ƒJ[ƒ\ƒ‹ˆÚ“®"
-	db	escp,"[09;52H”Žš–”‚Í‰üs     ”’l “ü—Í   "
-	db	escp,"[10;52HROLLUP/ROLLDOWN  ”’l +1/-1  "
-	db	escp,"[11;52Hf¥1              «Push      "
-	db	escp,"[12;52Hf¥2              ª«Exchange"
-	db	escp,"[13;52Hf¥3              ªPop       "
-	db	escp,"[14;52Hf¥4              •ÏX‘O‚É–ß‚·"
-	db	escp,"[15;52Hf¥6              ‰¹F–¼‚Ì•ÏX"
-	db	escp,"[16;52H------ MML‘‚«o‚µŒn“ ------"
-	db	escp,"[17;52Hf¥7              ˆêŒÂ(SEG—L) "
-	db	escp,"[18;52Hf¥8              ˆêŒÂ(SEG–³) "
-	db	escp,"[19;52Hf¥9              ‘S•”(SEG—L) "
-	db	escp,"[20;52Hf¥10             ‘S•”(SEG–³) "
-	db	escp,"[21;52H---------- ‚»‚Ì‘¼ -----------"
-	db	escp,"[22;52HHELP             KEY^ALGØ‘Ö"
-	db	escp,"[23;52HESC              save‚µ‚ÄI—¹"
-	db	escp,"[24;52HQ                save‚¹‚¸I—¹"
-	db	escp,"[25;52H============================="
-	db	escp,"[16;00H$"
+	db	escp,"[03;52H========= Key  Instructions ========="
+	db	escp,"[04;52H---------- Playback System ----------"
+	db	escp,"[05;52HFull key lower 2nd  Keyboard (c is C)"
+	db	escp,"[06;52H            INS/DEL      Octave +1/-1"
+	db	escp,"[07;52H---------- Editing  System ----------"
+	db	escp,"[08;52Hª«©¨                  Cursor Movement"
+	db	escp,"[09;52HAnyNumber/LBreak      Number Inputing"
+	db	escp,"[10;52HRollUp/RollDown  		  Number +1/-1"
+	db	escp,"[11;52HF1              		         «Push"
+	db	escp,"[12;52HF2		                	ª«Exchange"
+	db	escp,"[13;52HF3              				  ªPop"
+	db	escp,"[14;52HF4			              		  Undo"
+	db	escp,"[15;52HF6			          Change Tone Name"
+	db	escp,"[16;52H-------- MML Writing  System --------"
+	db	escp,"[17;52HF7	            	   Single with SEG"
+	db	escp,"[18;52HF8	            	Single without SEG"
+	db	escp,"[19;52HF9	            	      All with SEG"
+	db	escp,"[20;52HF10   				   All without SEG"
+	db	escp,"[21;52H-------------- Others ---------------"
+	db	escp,"[22;52HHELP             	 Key/Alg Switching"
+	db	escp,"[23;52HESC		             Save and Quit"
+	db	escp,"[24;52HQ                 Quit without Saving"
+	db	escp,"[25;52H====================================="
+	db	escp,"[16;00H$					 (check key_table)"
 
 notice2	label	byte
-	db	escp,"[03;52H======== Algorhythm ========="
-	db	escp,"[04;52H      †R†V                     "
-	db	escp,"[05;52H ALG0:†Z1†D†D†D2†D†D†D3†D†D†D4¨       "
-	db	escp,"[06;52H      †R†V                     "
-	db	escp,"[07;52H ALG1:†Z1†D†v†D3†D†D†D4¨           "
-	db	escp,"[08;52H       2†D†^                   "
-	db	escp,"[09;52H      †R†V                     "
-	db	escp,"[10;52H ALG2:†Z1†D†D†D†D†D†v†D4¨           "
-	db	escp,"[11;52H       2†D†D†D3†D†^               "
-	db	escp,"[12;52H      †R†V                     "
-	db	escp,"[13;52H ALG3:†Z1†D†D†D2†D†v†D4¨           "
-	db	escp,"[14;52H           3†D†^               "
-	db	escp,"[15;52H      †R†V                     "
-	db	escp,"[16;52H ALG4:†Z1†D†D†D2¨               "
-	db	escp,"[17;52H       3†D†D†D4¨               "
-	db	escp,"[18;52H      †R†V †R†D2¨               "
-	db	escp,"[19;52H ALG5:†Z1†D††D3¨               "
-	db	escp,"[20;52H         †Z†D4¨       †R†V      "
-	db	escp,"[21;52H      †R†V        ALG7:†Z1¨    "
-	db	escp,"[22;52H ALG6:†Z1†D†D†D2¨        2¨    "
+	db	escp,"[03;52H========  Algorithms ========"
+	db	escp,"[04;52H      EE                     "
+	db	escp,"[05;52H ALG0:E1EEE2EEE3EEE4¨       "
+	db	escp,"[06;52H      EE                     "
+	db	escp,"[07;52H ALG1:E1EEE3EEE4¨           "
+	db	escp,"[08;52H       2EE                   "
+	db	escp,"[09;52H      EE                     "
+	db	escp,"[10;52H ALG2:E1EEEEEEE4¨           "
+	db	escp,"[11;52H       2EEE3EE               "
+	db	escp,"[12;52H      EE                     "
+	db	escp,"[13;52H ALG3:E1EEE2EEE4¨           "
+	db	escp,"[14;52H           3EE               "
+	db	escp,"[15;52H      EE                     "
+	db	escp,"[16;52H ALG4:E1EEE2¨               "
+	db	escp,"[17;52H       3EEE4¨               "
+	db	escp,"[18;52H      EE EE2¨               "
+	db	escp,"[19;52H ALG5:E1EEE3¨               "
+	db	escp,"[20;52H         EE4¨       EE      "
+	db	escp,"[21;52H      EE        ALG7:E1¨    "
+	db	escp,"[22;52H ALG6:E1EEE2¨        2¨    "
 	db	escp,"[23;52H           3¨        3¨    "
 	db	escp,"[24;52H           4¨        4¨    "
 	db	escp,"[25;52H============================="
 	db	escp,"[16;00H$"
 
-keypush_mes	db	escp,"[06;02H"
-keypush_dat	db	"  $"
-keydata		db	"A-A B-B C D-D E-E F G-G A-A B-B C D-D E-"
-
-octarb_mes	db	escp,"[05;38HOctave : $"
-vname_mes	db	escp,"[05;21HName : "
+octarb_mes	db	escp,"[05;38HOctave: $"
+vname_mes	db	escp,"[05;21HName: "
 vname		db	"       $"
 nothing		db	"???????"
 vname_cursor	db	escp,"[05;28H$"

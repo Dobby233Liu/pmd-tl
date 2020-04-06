@@ -582,9 +582,9 @@ jumptable_0c0h	dw	jump1		;0ffh
 
 part_mes	db	"Part "
 part_chr	db	" "
-		db	9,"Length : $"
-loop_mes	db	9,"/ Loop : $"
-loop_mes2	db	9,"/ Found Infinite Local Loop!"
+		db	9,"Length: $"
+loop_mes	db	9,"/ Loop: $"
+loop_mes2	db	9,"/ Found infinite local loop!"
 _crlf_mes	db	13,10,"$"
 
 print_flag	db	0

@@ -10,8 +10,8 @@
 	mov	dx,offset rename_mes
 	jmp	vprint_end
 
-rename_mes	db	"!注意! 実行File名がrenameされています。",13,10,"$"
-virus_mes	db	"!警告! プログラムがウイルスに侵されている可能性があります。",13,10,"$"
+rename_mes	db	"NOTICE: The executable file name has been renamed.",13,10,"$"
+virus_mes	db	"WARNING: This program may have been infected by a virus.",13,10,"$"
 
 vprint_end:
 	mov	ah,9

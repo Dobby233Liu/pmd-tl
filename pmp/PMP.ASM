@@ -2,7 +2,7 @@
 ;	[PMP]	stop / mset / play
 ;
 
-date	equ	"2020/01/21"
+date	equ	"2020/03/10"
 
 @code	segment	para	public	'@code'
 	assume	cs:@code,ds:@code,es:@code
@@ -672,48 +672,48 @@ over_error:
 ;	Datas
 ;==============================================================================
 
-read_error_mes	db	"ファイルが見つかりません。",13,10,"$"
+read_error_mes	db	"The file can't be read.",13,10,"$"
 
-mstart_MES	DB	"演奏を開始します。",13,10,13,10,"$"
+mstart_MES	DB	"The playback started. ",13,10,13,10,"$"
 
-Mstop_MES	DB	"演奏を停止します。"
+Mstop_MES	DB	"The playback stopped."
 mes_crlf	db	13,10,"$"
 
-mes_filename	db	"Filename : $"
-mes_ppzfile	db	"PPZFile  : $"
-mes_ppsfile	db	"PPSFile  : $"
-mes_pcmfile	db	"PCMFile  : $"
-mes_title	db	"Title    : $"
-mes_composer	db	"Composer : $"
-mes_arranger	db	"Arranger : $"
-mes_memo	db	"         : $"
+mes_filename	db	"Filename: $"
+mes_ppzfile	db	"PPZFile: $"
+mes_ppsfile	db	"PPSFile: $"
+mes_pcmfile	db	"PCMFile: $"
+mes_title	db	"Title: $"
+mes_composer	db	"Composer: $"
+mes_arranger	db	"Arranger: $"
+mes_memo	db	"        : $"
 
-fade_MES	DB	"フェードアウトを開始します。",13,10,"$"
+fade_MES	DB	"Start fading out.",13,10,"$"
 
-efcstop_mes	db	"FM/SSG効果音を停止しました。",13,10,"$"
+efcstop_mes	db	"FM/SSG sound effect has been stopped.",13,10,"$"
 
-notres_mes	db	"ＰＭＤが常駐していません。",13,10,"$"
+notres_mes	db	"PMD isn't residenting.",13,10,"$"
 
-pcm_access_mes	db	"ＡＤＰＣＭがアクセス中です。",13,10,"$"
+pcm_access_mes	db	"ADPCM is being accessed.",13,10,"$"
 
-over_error_mes	db	"曲データバッファが足りません。",13,10,"$"
+over_error_mes	db	"There is no enough song data buffer.",13,10,"$"
 
-watch_mes	db	13,10,"ファイル更新を監視しています。",13,10,"$"
+watch_mes	db	13,10,"Monitoring file updates.",13,10,"$"
 
-pmp_USAGE_MES	DB	"Usage:  pmp /{P|S|Fn|E}",13,10
+pmp_USAGE_MES	DB	"Usage: pmp /{P|S|Fn|E}",13,10
 		db	"     or pmp [/{A|O|W}] filename[.M/.M2/.MZ]",13,10,13,10
 		db	"Option: /P   ... (pcmset/)play(/put)",13,10
 		db	"        /S   ... stop",13,10
-		db	"        /Fn  ... fadeout (n=speed def.=16)",13,10
+		db	"        /Fn  ... fadeout (n=speed. default: 16)",13,10
 		db	"        /E   ... stop SSG/FM Effects",13,10
-		db	"        /A   ... not set PPS/PCM file",13,10
-		db	"        /O   ... not put Title Messages",13,10
-		db	"        /W   ... watch File Update",13,10
+		db	"        /A   ... Do not set PPS/PCM file",13,10
+		db	"        /O   ... Do not print title messages",13,10
+		db	"        /W   ... Watch for file update",13,10
 		db	"   filename  ... stop/load(/pcmset)/play(/put)",13,10
 		db	"$"
 
-pmp_title_mes	db	"Professional Music Driver [P.M.D.] player for PMD ver.4.8r～",13,10
-		db	"                  Programmed by M.Kajihara ",date,13,10,13,10,"$"
+pmp_title_mes	db	"Professional Music Driver (P.M.D.) composition player for PMD ver.4.8r.",13,10
+		db	"Translated by LWYS,             Programmed by M.Kajihara ",date,13,10,13,10,"$"
 
 memo_flg	db	0
 pcm_flg		db	0

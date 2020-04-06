@@ -1,20 +1,20 @@
 ;==============================================================================
 ;
-;	MML Compiler/Effect Compiler FOR PC-9801/88VA 
-;							ver 4.8r
+;	MML/SFX compiler for PC-9801/88VA English ver.
+;							ver 4.8sEn
 ;
 ;==============================================================================
 ;	.186
 
-ver		equ	"4.8s"		;version
+ver		equ	"4.8sEn"		;version
 vers		equ	48h
-date		equ	"2020/01/22"	;date
+date		equ	"2020/03/10"	;date
 
 ifndef	hyouka
-hyouka		equ	0		;1で評価版(save機能cut)
+hyouka		equ	0		; Trial verson (no save feature)
 endif
 ifndef	efc
-efc		equ	0		;ＦＭ効果音コンパイラかどうか
+efc		equ	0		; FM sfx compiling
 endif
 
 ;==============================================================================
@@ -35,9 +35,9 @@ endif
 ;
 ;==============================================================================
 
-olddat		equ	0		;v2.92以前のデータ作成
-split		equ	0		;音色データがＳＰＬＩＴ形式かどうか
-tempo_old_flag	equ	0		;テンポ処理 新旧flag
+olddat		equ	0		; format before v2.92
+split		equ	0		; inst. in SPLIT formats
+tempo_old_flag	equ	0		; old tempo computing
 pmdvector	equ	60h		;VRTC.割り込み
 cr		equ	13
 lf		equ	10
@@ -8009,50 +8009,50 @@ err_table	dw	err00,err01,err02,err03,err04,err05,err06,err07
 		dw	err24,err25,err26,err27,err28,err29,err30,err31
 		dw	err32,err33,err34,err35
 
-errmes_1	db	" Error ",eof
+errmes_1	db	"Error ",eof
 errmes_2	db	": Part ",eof
 errmes_3	db	": Command ",eof
 errmes_4	db	cr,lf,"---------- ",eof
 errmes_5	db	" (Macro)",eof
-incfile_mes	db	"Include file :",eof
+incfile_mes	db	"Include file:",eof
 crlf_mes	db	cr,lf,eof
 
-err00	db	"オプション指定が間違っています。",cr,lf,eof
-err01	db	"MML中に理解不能な文字があります。",cr,lf,eof
-err02	db	"指定された数値が異常です。",cr,lf,eof
-err03	db	"MMLファイルが読み込めません。",cr,lf,eof
-err04	db	"Mファイルが書き込めません。",cr,lf,eof
-err05	db	"FFファイルが書き込めません。",cr,lf,eof
-err06	db	"パラメータの指定が足りません。",cr,lf,eof
-err07	db	"使用出来ない文字を指定しています。",cr,lf,eof
-err08	db	"指定された音長が長すぎます。",cr,lf,eof
-err09	db	"ポルタメント終了記号 } がありません。",cr,lf,eof
-err10	db	"Lコマンド後に音長指定がありません。",cr,lf,eof
-err11	db	"効果音パートでハードＬＦＯは使用出来ません。",cr,lf,eof
-err12	db	"効果音パートでテンポ命令は使用出来ません。",cr,lf,eof
-err13	db	"ポルタメント開始記号 { がありません。",cr,lf,eof
-err14	db	"ポルタメントコマンド中の指定が間違っています。",cr,lf,eof
-err15	db	"ポルタメントコマンド中に休符があります。",cr,lf,eof
-err16	db	"音程コマンドの直後に指定して下さい。",cr,lf,eof
-err17	db	"ここではこのコマンドは使用できません。",cr,lf,eof
-err18	db	"MMLのサイズが大き過ぎます。",cr,lf,eof
-err19	db	"コンパイル後のサイズが大き過ぎます。",cr,lf,eof
-err20	db	"W/Sコマンド使用中に255stepを越える音長は指定出来ません。",cr,lf,eof
-err21	db	"使用不可能な音長を指定しています。",cr,lf,eof
-err22	db	"タイが音程命令直後に指定されていません。",cr,lf,eof
-err23	db	"ループ開始記号 [ がありません。",cr,lf,eof
-err24	db	"無限ループ中に音長を持つ命令がありません。",cr,lf,eof
-err25	db	"１ループ中に脱出記号が２ヶ所以上あります。",cr,lf,eof
-err26	db	"音程が限界を越えています。",cr,lf,eof
-err27	db	"MML変数が定義されていません。",cr,lf,eof
-err28	db	"音色ファイルか/Vオプションを指定してください。",cr,lf,eof
-err29	db	"Ｒパートが必要分定義されていません。",cr,lf,eof
-err30	db	"音色が定義されていません。",cr,lf,eof
-err31	db	"直前の音符長が圧縮または加工されています。",cr,lf,eof
-err32	db	"Rパートでタイ・スラーは使用出来ません。",cr,lf,eof
-err33	db	"可変長MML変数の定義数が256を越えました。",cr,lf,eof
-err34	db	"分散和音開始記号 {{ がありません。",cr,lf,eof
-err35	db	"分散和音コマンド中の指定が間違っています。",cr,lf,eof
+err00	db	"The option specification is incorrect.",cr,lf,eof
+err01	db	"Indefinable token in the MML code.",cr,lf,eof
+err02	db	"The specified number is invalid.",cr,lf,eof
+err03	db	"The MML file cannot be read.",cr,lf,eof
+err04	db	"The M file cannot be written.",cr,lf,eof
+err05	db	"The FF file cannot be written.",cr,lf,eof
+err06	db	"Insufficient parameter specification.",cr,lf,eof
+err07	db	"Invaild token in the MML code.",cr,lf,eof
+err08	db	"The specified note length is too long.",cr,lf,eof
+err09	db	"The portamento end symbol (}) is missing.",cr,lf,eof
+err10	db	"No pitch specification is after the L command.",cr,lf,eof
+err11	db	"Hard LFO cannot be used for the sound effect part.",cr,lf,eof
+err12	db	"Tempo commands cannot be used with sound effect parts.",cr,lf,eof
+err13	db	"The portamento start symbol ({) is missing.",cr,lf,eof
+err14	db	"The specification in the portamento command is incorrect.",cr,lf,eof
+err15	db	"There is a rest in the portamento command.",cr,lf,eof
+err16	db	"A command is specified immediately after the pitch command.",cr,lf,eof
+err17	db	"This command cannot be used here.",cr,lf,eof
+err18	db	"The MML size is too large.",cr,lf,eof
+err19	db	"Compiled size is too large.",cr,lf,eof
+err20	db	"When using the W/S command, you cannot specify a duration that exceeds 255 steps.",cr,lf,eof
+err21	db	"An unusable length is specified.",cr,lf,eof
+err22	db	"The tie is not specified immediately after the pitch command.",cr,lf,eof
+err23	db	"Missing loop start symbol [",cr,lf,eof
+err24	db	"There is no instruction with a duration in an infinite loop.",cr,lf,eof
+err25	db	"There are two or more escape symbols in one loop.",cr,lf,eof
+err26	db	"The pitch has exceeded the limit.",cr,lf,eof
+err27	db	"The MML variable is not defined.",cr,lf,eof
+err28	db	"Specify a tone file or a /V option.",cr,lf,eof
+err29	db	"R part is not defined though required.",cr,lf,eof ; as required ?
+err30	db	"The tone has not been defined.",cr,lf,eof
+err31	db	"The previous note length is compressed or processed.",cr,lf,eof
+err32	db	"Tie slurs cannot be used in the R part.",cr,lf,eof
+err33	db	"The number of defined variable-length MML variables has exceeded 256.",cr,lf,eof
+err34	db	"Missing distributed chord start symbol {{",cr,lf,eof
+err35	db	"The specification in the distributed chord command is incorrect.",cr,lf,eof
 
 err_seg		ends
 
@@ -8138,16 +8138,16 @@ mml_seg	segment	byte	public
 ;	Work Area
 ;==============================================================================
 warning_mes	db	"Warning ",eof
-not_ff_mes	db	": 音色ファイル名が指定されていません．",cr,lf,eof
-ff_readerr_mes	db	": 音色ファイルが読み込めません．",cr,lf,eof
-not_pmd_mes	db	": ＰＭＤが常駐していません．",cr,lf,eof
-loop_err_mes	db	" : ループ終了記号 ] が足りません。",cr,lf,eof
-mcopt_err_mes	db	": 環境変数 MCOPT の記述に誤りがあります。",13,10,eof
+not_ff_mes	db	": The tone file name is not specified.",cr,lf,eof
+ff_readerr_mes	db	": The tone file cannot be read.",cr,lf,eof
+not_pmd_mes	db	": PMD is not in residentment.",cr,lf,eof
+loop_err_mes	db	" : Loop end symbol ] is not enough.",cr,lf,eof
+mcopt_err_mes	db	": The description in the environment variable MCOPT is incorrect.",13,10,eof
 
 if	efc
 usames		db	"Usage:  EFC [/option] filename[.EML] [filename[.FF]]",cr,lf,cr,lf
-		db	"Option: /V  Compile with Tonedatas",cr,lf
-		db	"        /VW Write Voicefile after Compile",cr,lf
+		db	"Option: /V  compile with tone datas",cr,lf
+		db	"        /VW write Voicefile after compile",cr,lf
 		db	"        /N  Compile on OPN Mode(Default)",cr,lf
 		db	"        /M  Compile on OPM Mode",cr,lf
 		db	"        /L  Compile on OPL Mode",cr,lf,eof
@@ -8159,57 +8159,60 @@ titmes		db	" .EML file --> .EFC file Compiler ver ",ver
 
 else
 
-usames		db	"Usage:  MC"
+usames		db	"Usage: MC"
 if	hyouka
 		db	"H"
 endif
-		db	" [/option] filename[.MML] [filename[.FF]]",cr,lf,cr,lf
-		db	"Option: "
+		db	" [/options] filename[.MML] [filename[.FF]]",cr,lf,cr,lf
+		db	"Options: "
 ife	hyouka
-		db	"/V  Compile with Tonedatas & Messages & Filenames",cr,lf
-		db	"        /VW Write Tonedata after Compile",cr,lf
+		db	"/V  	 Compile with tone data, messages and filename",cr,lf
+		db	"        /VW Write tone data after compilation",cr,lf
 		db	"        "
 endif
-		db	"/N  Compile on OPN   Mode(Default)",cr,lf
-		db	"        /L  Compile on OPL   Mode",cr,lf
+		db	"/N  		   OPN   Mode(Default)",cr,lf
+		db	"        /L  		    OPL   Mode",cr,lf
 ife	hyouka
-		db	"        /M  Compile on OPM   Mode",cr,lf
-		db	"        /T  Compile on TOWNS Mode",cr,lf
-		db	"        /P  Play after Compile Complete",cr,lf
-		db	"        /S  Not Write Compiled File & Play",cr,lf
+		db	"        /M  			OPM   Mode",cr,lf
+		db	"        /T  			TOWNS Mode",cr,lf
+		db	"        /P   play after compiling",cr,lf
+		db	"        /S  don't write compiled file & play",cr,lf
 endif
-		db	"        /A  Not Set ADPCM_File before Play",cr,lf
-		db	"        /O  Not Put Title Messages after Play",cr,lf
-		db	"        /C  Calculate & Put Total Length of Parts",cr,lf
+		db	"        /A  don't set PCMFile before play",cr,lf
+		db	"        /O  don't print title messages before playing",cr,lf
+		db	"        /C  calculate & print total length of parts",cr,lf
 		db	eof
 		
+titmes_cos		equ	" .MML file --> .M file Compiler"
 ife	hyouka
-titmes		db	" .MML file --> .M file Compiler"
+titmes		db	titmes_cos
 else
-titmes		db	" .MML file Compiler & Player (MC.EXE評価版)"
+titmes		db	titmes_cos," (trial version)"
 endif
 		db	" ver ",ver,cr,lf
 		db	"		Programmed by M.Kajihara(KAJA) ",date
 		db	cr,lf,cr,lf,eof
 endif
 
-finmes		db	"Compile Completed."
+finmes		db	"Compiliation completed."
 mes_crlf	db	cr,lf,eof
 
-mes_title	db	cr,lf,"演奏を開始します。",cr,lf,cr,lf
-		db	"Title    : ",eof
-mes_composer	db	"Composer : ",eof
-mes_arranger	db	"Arranger : ",eof
-mes_memo	db	"         : ",eof
+mes_title	db	cr,lf,"The playback started.",cr,lf,cr,lf
+		db	"Title: ",eof
+mes_composer	db	"Composer: ",eof
+mes_arranger	db	"Arranger: ",eof
+mes_memo	db	"        : ",eof
 
 mes_ppzfile	db	"PPZFile  : ",eof
 mes_ppsfile	db	"PPSFile  : ",eof
 mes_pcmfile	db	"PCMFile  : ",eof
 
+; these is going to be searched, do not translate
 user_txt	db	"USER=",0
 composer_txt	db	"COMPOSER=",0
 arranger_txt	db	"ARRANGER=",0
 mcopt_txt	db	"MCOPT=",0
+; dnt end
 
 ife	tempo_old_flag
 tempo		db	0
