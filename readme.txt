@@ -16,6 +16,6 @@ please do so.
 
 Please contact us on Twitter, YouTube Channel, etc. below.
 
-2019/12/25	M.Kajihara(KAJA) / ŠŒ´³—T / Masahiro Kajihara
+2019/12/25	M.Kajihara(KAJA) / æ¢¶åŸæ­£è£• / Masahiro Kajihara
 https://twitter.com/kajaponn
 https://www.youtube.com/channel/UC3Ytls4c0n_OpFFQQDXFYhA
