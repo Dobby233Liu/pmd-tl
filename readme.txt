@@ -1,21 +1,24 @@
-In commemoration of the 30th anniversary of the development of PMD since 1989,
-all sources of PMD (Driver) / MC (Compiler) / PMP (Player),
-which have received many requests from overseas, will be released.
+In commemoration of the 30th anniversary of the start of PMD development in 1989,
+we are releasing all sources of PMD (the driver) / MC (the compiler) / PMP (the player),
+which have been requested by many people especially from overseas.
 
-I used SLR Systems' "OPTASM" for assembly.
+I used SLR Systems' OPTASM to assemble them.
 
-OPTASM.EXE / OPTASM  Copyright (C) SLR Systems 1988-90 Release 1.65
-OPTLINK.EXE/ OPTLINK Copyright (C) SLR Systems 1989-90 Release 2.11
+Version info:
+OPTASM.EXE: Copyright (C) SLR Systems 1988-90 Release 1.65
+OPTLINK.EXE: Copyright (C) SLR Systems 1989-90 Release 2.11
 
 Execute the assemble.bat in each folder
-with the above two paths passed, and a COM / EXE file will be created.
+with the above two paths in %PATH%,
+and a executable for the program will be built.
 
-We don't give up copyright on the source, but you can use it freely.
-Rather, if you have any ideas for reusing these old things now,
-please do so.
+We don't give up copyright on the source, but you are free to use it as you wish.
+If you have any ideas on how to reuse this old stuff,
+please feel free to do so.
 
-Please contact us on Twitter, YouTube Channel, etc. below.
+Feel free to contact me on my Twitter or YouTube Channel.
 
-2019/12/25	M.Kajihara(KAJA) / 梶原正裕 / Masahiro Kajihara
+Masahiro Kajihara (KAJA)
+2019/12/25
 https://twitter.com/kajaponn
 https://www.youtube.com/channel/UC3Ytls4c0n_OpFFQQDXFYhA
