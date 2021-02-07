@@ -8,7 +8,7 @@ Version info:
 OPTASM.EXE: Copyright (C) SLR Systems 1988-90 Release 1.65
 OPTLINK.EXE: Copyright (C) SLR Systems 1989-90 Release 2.11
 
-Execute the assemble.bat in each folder
+Run assemble.bat in each folder
 with the above two paths in %PATH%,
 and a executable for the program will be built.
 
